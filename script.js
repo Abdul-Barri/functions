@@ -83,11 +83,13 @@ const thirdPersonName = "Habeeb";
 //   };
 // };
 
-const greet = (greeting) => {
-  return (name) => {
-    console.log(`${greeting} ${name}`);
-  };
-};
+// const greet = (greeting) => {
+//   return (name) => {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+const greet = (greeting) => (name) => console.log(`${greeting} ${name}`);
 
 const greeterHey = greet("Hey");
 
@@ -102,3 +104,48 @@ greeterHello(friendName);
 greet("Hey")(myName);
 greet("Assalam Alaikum")(myName);
 greet("Hello")(friendName);
+
+////////////////////////////////////////
+
+const airNigeria = {
+  airline: "Air Nigeria",
+  iataCode: "ANG",
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({
+      flight: `${this.iataCode}${flightNum}`,
+      name,
+    });
+  },
+};
+
+airNigeria.book(234, "Abdul Barri Lawal");
+airNigeria.book(625, "Rahinna Adetoun");
+
+const book = airNigeria.book;
+
+const swissAirlines = {
+  airline: "Swiss Airlines",
+  iataCode: "SA",
+  bookings: [],
+};
+
+const emiratesAir = {
+  airline: "Emirates Air",
+  iataCode: "EA",
+  bookings: [],
+};
+
+// call method
+
+book.call(swissAirlines, 751, "Abdul Qayoom Lawal");
+book.call(emiratesAir, 459, "Bamidele Lawal");
+book.call(emiratesAir, 557, "Taoheedah Lawal");
+book.call(emiratesAir, 44, "Maroof Lawal");
+book.call(emiratesAir, 91, "Hamdalat Lawal");
+book.call(swissAirlines, 74, "Qudoos Lawal");
+
+console.log(airNigeria, swissAirlines, emiratesAir);
